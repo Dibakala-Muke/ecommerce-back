@@ -49,7 +49,7 @@ class CategorieController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Erreur lors de la création du critère.',
+                'message' => 'Erreur lors de la création de la catégorie.',
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -60,7 +60,13 @@ class CategorieController extends Controller
         try {
             $category = Categorie::query()
                 ->findOrFail($id);
-            return new CategorieResource($category);
+            $category = new CategorieResource($category);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Catégorie récupérée avec succès.',
+                'data' => $category
+            ], 200);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
@@ -73,9 +79,20 @@ class CategorieController extends Controller
     public function update(Request $request, $id)
     {
         try {
+            $request->validate([
+                'name' => 'sometimes|required',
+                'slug' => 'sometimes|required|unique:categories,slug,' . $id,
+                'actif' => 'sometimes|boolean'
+            ]);
+
             $category = Categorie::findOrFail($id);
             $category = $category->update($request->all());
-            return new CategorieResource($category);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Catégorie mise à jour avec succès.',
+                'data' => $category
+            ], 200);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
@@ -88,7 +105,12 @@ class CategorieController extends Controller
     public function destroy($id)
     {
         try {
-            return Categorie::destroy($id);
+            Categorie::destroy($id);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Catégorie supprimée avec succès.'
+            ], 200);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
