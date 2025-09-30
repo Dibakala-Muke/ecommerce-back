@@ -28,6 +28,9 @@ Route::prefix('products')->group(function () {
 Route::prefix('categories')->group(function () {
     Route::get('/', [CategorieController::class, 'index']);      // Liste des catégories
     Route::post('/', [CategorieController::class, 'store']);     // Créer une catégorie
+    Route::get('{id}', [CategorieController::class, 'show']);    // Détail d’une catégorie
+    Route::put('{id}', [CategorieController::class, 'update']);   // Modifier une catégorie
+    Route::delete('{id}', [CategorieController::class, 'destroy']); // Supprimer une catégorie
 });
 
 Route::prefix('cart')->group(function () {
