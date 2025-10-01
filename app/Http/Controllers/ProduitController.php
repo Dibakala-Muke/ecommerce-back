@@ -12,7 +12,7 @@ class ProduitController extends Controller
     public function index(Request $request)
     {
         try {
-            $products = Produit::with('category')->get();  
+            $products = Produit::with('category')->paginate(9);
             return ProduitResource::collection($products);
         } catch (\Throwable $th) {
             Log::error($th);
