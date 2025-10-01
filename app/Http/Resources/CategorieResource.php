@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use App\Models\Categorie;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
 
 class CategorieResource extends JsonResource
 {
@@ -19,7 +20,9 @@ class CategorieResource extends JsonResource
             "id" => $this->id,
             "name" => $this->name,
             "slug" => $this->slug,
-            "categorie_count" => Categorie::count()
+            "created_at" => $this->created_at,
+            "updated_at" => $this->updated_at,
+            "product_count" => $this->products()->count(),
         ];
     }
 }
