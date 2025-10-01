@@ -58,8 +58,7 @@ class CategorieController extends Controller
     public function show($id)
     {
         try {
-            $category = Categorie::query()
-                ->findOrFail($id);
+            $category = Categorie::findOrFail($id);
             $category = new CategorieResource($category);
 
             return response()->json([
