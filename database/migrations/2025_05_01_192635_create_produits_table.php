@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('brand');
             $table->enum('gender', ['homme', 'femme', 'enfant']);
             $table->foreignId('category_id')->constrained('categories')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
