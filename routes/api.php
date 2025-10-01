@@ -18,35 +18,35 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
 
 
 Route::prefix('products')->group(function () {
-    Route::get('/', [ProduitController::class, 'index']);       // Tous les produits
-    Route::get('{id}', [ProduitController::class, 'show']);     // Détail d’un produit
-    Route::post('/', [ProduitController::class, 'store']);      // Créer un produit
-    Route::put('{id}', [ProduitController::class, 'update']);   // Modifier un produit
-    Route::delete('{id}', [ProduitController::class, 'destroy']);// Supprimer un produit
+    Route::get('/', [ProduitController::class, 'index']);
+    Route::get('{id}', [ProduitController::class, 'show']);
+    Route::post('/', [ProduitController::class, 'store']);
+    Route::put('{id}', [ProduitController::class, 'update']);
+    Route::delete('{id}', [ProduitController::class, 'destroy']);
 });
 
 Route::prefix('categories')->group(function () {
-    Route::get('/', [CategorieController::class, 'index']);      // Liste des catégories
-    Route::post('/', [CategorieController::class, 'store']);     // Créer une catégorie
-    Route::get('{id}', [CategorieController::class, 'show']);    // Détail d’une catégorie
-    Route::put('{id}', [CategorieController::class, 'update']);   // Modifier une catégorie
-    Route::delete('{id}', [CategorieController::class, 'destroy']); // Supprimer une catégorie
+    Route::get('/', [CategorieController::class, 'index']);
+    Route::post('/', [CategorieController::class, 'store']);
+    Route::get('{id}', [CategorieController::class, 'show']);
+    Route::put('{id}', [CategorieController::class, 'update']);
+    Route::delete('{id}', [CategorieController::class, 'destroy']);
 });
 
 Route::prefix('cart')->group(function () {
-    Route::get('/', [CartController::class, 'index']);                     // Afficher le panier
-    Route::post('/guest', [CartController::class, 'createGuestCart']);     // Créer un panier invité
-    Route::post('/add', [CartController::class, 'addItem']);               // Ajouter un item
-    Route::delete('/remove', [CartController::class, 'removeItem']);       // Supprimer un item
-    Route::delete('/clear/{cartId}', [CartController::class, 'clearCart']); // Vider le panier
+    Route::get('/', [CartController::class, 'index']);
+    Route::post('/guest', [CartController::class, 'createGuestCart']);
+    Route::post('/add', [CartController::class, 'addItem']);
+    Route::delete('/remove', [CartController::class, 'removeItem']);
+    Route::delete('/clear/{cartId}', [CartController::class, 'clearCart']);
 });
 
 Route::prefix('orders')->group(function () {
-    Route::post('/', [OrderController::class, 'store']); // Créer une commande
+    Route::post('/', [OrderController::class, 'store']);
 });
 
 Route::prefix('messages')->group(function () {
-    Route::get('/{userId}', [MessageController::class, 'index']); // Tous les messages d’un utilisateur
-    Route::post('/', [MessageController::class, 'store']);        // Envoyer un message
+    Route::get('/{userId}', [MessageController::class, 'index']);
+    Route::post('/', [MessageController::class, 'store']);
 });
 
