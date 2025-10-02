@@ -12,7 +12,11 @@ class ProduitController extends Controller
     public function index(Request $request)
     {
         try {
-            $products = Produit::with('category')->paginate(9);
+            $gender = $request->input('gender');
+            if ($gender != null) {
+                $products = Produit::with('category')->where('gender', $gender);
+            }
+            $products = $products->paginate(9);
             return ProduitResource::collection($products);
         } catch (\Throwable $th) {
             Log::error($th);
